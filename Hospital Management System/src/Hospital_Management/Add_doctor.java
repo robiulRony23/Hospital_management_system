@@ -1,0 +1,599 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Hospital_Management;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author J786N72
+ */
+public class Add_doctor extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Add_patient
+     */
+    public Add_doctor() {
+        initComponents();
+        setSize(850,650);
+        setLocation(100,50);
+        findId();
+    }
+    
+       
+     String idd="20001";   
+    public void findId()
+    {
+        
+        int i;
+        try
+        {
+             Connection con;
+        Statement stmt;
+        ResultSet rs;
+        String host="jdbc:derby://localhost:1527/data_folder";
+        String uName="rony";
+        String uPass="rony";
+             con = DriverManager.getConnection(host,uName,uPass);
+            stmt=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        
+         String sql="SELECT * FROM RONY.DOCTOR_DETAILS";
+         rs=stmt.executeQuery(sql);
+         
+         if(rs.last())
+         {
+             idd=rs.getString("ID");
+             i=Integer.parseInt(idd);
+             i++;
+             idd=Integer.toString(i); 
+         }
+         id.setText(idd);
+         
+         stmt.close();
+         rs.close();
+         
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+    public void update()
+    { 
+        try{
+             Connection con;
+        Statement stmt;
+        ResultSet rs;
+            
+        String host="jdbc:derby://localhost:1527/data_folder";
+        String uName="rony";
+        String uPass="rony";
+        con = DriverManager.getConnection(host,uName,uPass);
+        stmt=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      
+         String sql="SELECT * FROM RONY.DOCTOR_LOGIN";
+         rs=stmt.executeQuery(sql);
+         rs.moveToInsertRow();
+     
+               
+         rs.updateString("USERNAME",firstnm.getText());
+         rs.updateString("PASSWORD",firstnm.getText());
+          rs.updateString("ID",idd);
+         
+         rs.insertRow();
+         
+         stmt.close();
+         rs.close();
+    }
+        catch(Exception e)
+    {
+        System.out.println(e.getMessage()+"here");
+    }
+    }
+         
+   public void Add()
+    {     
+        
+        try{
+             Connection con;
+        Statement stmt;
+        ResultSet rs;
+            
+        String host="jdbc:derby://localhost:1527/data_folder";
+        String uName="rony";
+        String uPass="rony";
+        con = DriverManager.getConnection(host,uName,uPass);
+   
+        stmt=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        
+         String sql="SELECT * FROM RONY.DOCTOR_DETAILS";
+         rs=stmt.executeQuery(sql);
+         rs.moveToInsertRow();
+         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+         
+        
+         rs.updateString("ID",idd);
+         rs.updateString("FIRST_NAME",firstnm.getText());
+         rs.updateString("LAST_NAME",lastnm.getText());
+         rs.updateString("SEX",(String)sex.getSelectedItem());
+         rs.updateString("DOB",sdf.format(dob.getDate()));
+         rs.updateString("BLOOD_GROUP",(String)bloodgrp.getSelectedItem());
+         rs.updateString("PHONE",phone.getText());
+         rs.updateString("EMAIL",email.getText());
+         rs.updateString("JOIN_DATE",sdf.format(joinDate.getDate()));
+         rs.updateString("QUALIFICATION",qualification.getText());
+         rs.updateString("SPECIALIZATION",(String)specialization.getSelectedItem());
+         rs.updateString("ROOM_NUM",room.getText());
+         rs.updateString("VISITING_HOUR",visit.getText());
+         
+         rs.insertRow();
+         
+         stmt.close();
+         rs.close();
+         
+         update();
+              
+         findId();
+         firstnm.setText("");
+         lastnm.setText("");
+         phone.setText("");
+         email.setText("");
+         qualification.setText("");
+         room.setText("");
+         visit.setText("");
+         
+         
+       
+        // dob.setDate();
+         
+        
+         
+        JOptionPane.showMessageDialog(this,"Record has been added","ADD",-1);
+        
+        
+        
+    }catch(Exception e)
+    {
+        System.out.println(e.getMessage()+"why???????");
+    } 
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        search = new javax.swing.JButton();
+        view = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        visit = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        room = new javax.swing.JTextField();
+        firstnm = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        lastnm = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
+        sex = new javax.swing.JComboBox<>();
+        bloodgrp = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        qualification = new javax.swing.JTextArea();
+        email = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        specialization = new javax.swing.JComboBox<>();
+        dob = new com.toedter.calendar.JDateChooser();
+        joinDate = new com.toedter.calendar.JDateChooser();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        search.setBackground(new java.awt.Color(204, 204, 204));
+        search.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        search.setText("Search Doctor");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(search);
+        search.setBounds(280, 10, 230, 40);
+
+        view.setBackground(new java.awt.Color(204, 204, 204));
+        view.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        view.setText("View Doctor");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
+        getContentPane().add(view);
+        view.setBounds(530, 10, 230, 40);
+
+        jButton6.setBackground(new java.awt.Color(153, 153, 153));
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jButton6.setText("Add Doctor");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(40, 10, 220, 40);
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 255));
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(10, 60, 760, 0);
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 204));
+        jSeparator2.setForeground(new java.awt.Color(51, 51, 255));
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(10, 62, 800, 10);
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel1.setText("ADD DOCTOR");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 80, 400, 60);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel2.setText("Last Name");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(440, 230, 100, 40);
+
+        visit.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        visit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(visit);
+        visit.setBounds(180, 580, 190, 30);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel3.setText("ID NO.");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(30, 180, 70, 40);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel4.setText("Blood group");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 350, 110, 40);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel5.setText("First Name");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(30, 230, 100, 40);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel6.setText("Sex");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(30, 290, 70, 40);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel7.setText("Date Of Birth");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(440, 280, 130, 40);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel10.setText("Qualification");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(440, 400, 110, 40);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel11.setText("Visiting Hour");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(30, 570, 140, 40);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel12.setText("e-mail");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(440, 340, 110, 40);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel13.setText("Specialization");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(440, 470, 130, 40);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel14.setText("Room No.");
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(30, 470, 90, 40);
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 255));
+        jButton7.setText("LogOut");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(670, 80, 120, 40);
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 0, 255));
+        jButton8.setText("HOME");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8);
+        jButton8.setBounds(550, 80, 110, 40);
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hospital_Management/text.jpg"))); // NOI18N
+        jLabel15.setText("jLabel15");
+        getContentPane().add(jLabel15);
+        jLabel15.setBounds(10, 70, 800, 70);
+
+        jButton9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 0, 255));
+        jButton9.setText("LogOut");
+        getContentPane().add(jButton9);
+        jButton9.setBounds(670, 80, 120, 40);
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(0, 0, 255));
+        jButton10.setText("LogOut");
+        getContentPane().add(jButton10);
+        jButton10.setBounds(670, 80, 120, 40);
+
+        add.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add.setForeground(new java.awt.Color(0, 0, 255));
+        add.setText("ADD");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        getContentPane().add(add);
+        add.setBounds(570, 160, 220, 40);
+
+        room.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        room.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(room);
+        room.setBounds(180, 470, 190, 30);
+
+        firstnm.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        firstnm.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(firstnm);
+        firstnm.setBounds(180, 230, 190, 30);
+
+        id.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        id.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(id);
+        id.setBounds(180, 180, 190, 30);
+
+        lastnm.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        lastnm.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(lastnm);
+        lastnm.setBounds(600, 230, 190, 30);
+
+        phone.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        phone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(phone);
+        phone.setBounds(180, 410, 190, 30);
+
+        sex.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sex.setMaximumRowCount(2);
+        sex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        sex.setSelectedIndex(1);
+        sex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexActionPerformed(evt);
+            }
+        });
+        getContentPane().add(sex);
+        sex.setBounds(180, 290, 190, 30);
+
+        bloodgrp.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        bloodgrp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A(+)ve", "A(-)ve", "B(+)ve", "B(-)ve", "AB(+)ve", "AB(-)ve", "O(+)ve", "O(-)ve" }));
+        getContentPane().add(bloodgrp);
+        bloodgrp.setBounds(180, 350, 190, 30);
+
+        qualification.setColumns(20);
+        qualification.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        qualification.setRows(5);
+        jScrollPane2.setViewportView(qualification);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(600, 390, 200, 50);
+
+        email.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        email.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(email);
+        email.setBounds(600, 340, 190, 30);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel16.setText("Contact No.");
+        getContentPane().add(jLabel16);
+        jLabel16.setBounds(30, 410, 100, 40);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel17.setText("Joining date");
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(30, 520, 140, 40);
+
+        specialization.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        specialization.setMaximumRowCount(16);
+        specialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicine", "Cardiologist", "neurologist", "Gynecologist", "Dermatologist", "Ophthalmologist", "Nephrologist", "Pediatrician", "Psychologist", "Urologist", "Pathologist", "Obstetrician", "Orthopaedic Surgeon", "Hematologist", "Anesthesiologist" }));
+        specialization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                specializationActionPerformed(evt);
+            }
+        });
+        getContentPane().add(specialization);
+        specialization.setBounds(600, 470, 200, 40);
+        getContentPane().add(dob);
+        dob.setBounds(600, 282, 190, 30);
+        getContentPane().add(joinDate);
+        joinDate.setBounds(180, 530, 190, 30);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void sexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        Search_doctor search_doctor=new Search_doctor();
+        search_doctor.setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+         doctor_table view_doctor=new doctor_table();
+         view_doctor.setVisible(true);
+         //dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Admin_home admin_home=new Admin_home();
+        admin_home.setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Login_Home login_home=new Login_Home();
+        login_home.setVisible(true);
+        dispose();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void specializationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specializationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_specializationActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code here:
+        Add();
+    }//GEN-LAST:event_addActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Add_doctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Add_doctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Add_doctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Add_doctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Add_doctor().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
+    private javax.swing.JComboBox<String> bloodgrp;
+    private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField firstnm;
+    private javax.swing.JTextField id;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private com.toedter.calendar.JDateChooser joinDate;
+    private javax.swing.JTextField lastnm;
+    private javax.swing.JTextField phone;
+    private javax.swing.JTextArea qualification;
+    private javax.swing.JTextField room;
+    private javax.swing.JButton search;
+    private javax.swing.JComboBox<String> sex;
+    private javax.swing.JComboBox<String> specialization;
+    private javax.swing.JButton view;
+    private javax.swing.JTextField visit;
+    // End of variables declaration//GEN-END:variables
+}
